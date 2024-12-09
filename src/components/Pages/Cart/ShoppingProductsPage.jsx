@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 function ShoppingProductsPage() {
   const { addToCart } = useCart();
-  const { searchQuery } = useSearch();  
+  const { searchQuery, setSearchQuery } = useSearch();  // Access both searchQuery and setSearchQuery
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -25,6 +25,18 @@ function ShoppingProductsPage() {
 
   return (
     <div className="max-w-5xl mx-auto p-6 bg-gray-50 dark:bg-gray-900">
+      {/* Search bar section */}
+      <div className="mb-6">
+        <input
+          type="text"
+          placeholder="Search for products..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}  // Update search query on input change
+          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+        />
+      </div>
+
+      {/* Products grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 dark:bg-gray-900">
         {loading
           ? Array.from({ length: 6 }).map((_, index) => (
